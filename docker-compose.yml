@@ -61,6 +61,22 @@ services:
       - ./logs/fedora/fcrepo:/usr/local/fedora/server/logs
       - ./logs/fedora/tomcat:/usr/local/tomcat/logs
 
+  isle-blazegraph:
+    # build:
+    #   context: ./images/isle-blazegraph
+    image: islandoracollabgroup/isle-blazegraph:latest
+    container_name: isle-blazegraph-${CONTAINER_SHORT_ID}
+    environment:
+      - JAVA_MAX_MEM=4096M
+      - JAVA_MIN_MEM=1024M
+    env_file: 
+      - tomcat.env
+    ports:
+      - "8084:8080"
+    volumes:
+      - isle-blazegraph-data:/var/bigdata
+      - ./logs/blazegraph:/usr/local/tomcat/logs
+
   solr:
     # build:
     #   context: ./images/isle-solr
@@ -163,3 +179,4 @@ volumes:
   isle-fedora-resourceIndex:
   isle-fedora-activemq:
   isle-fedora-XACML:
+  isle-blazegraph-data:
