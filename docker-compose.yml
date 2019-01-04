@@ -37,7 +37,6 @@ services:
   fedora:
     # build:
     #   context: ./images/isle-fedora
-    #image: islandoracollabgroup/isle-fedora:1.1
     image: islandoracollabgroup/isle-fedora:blazegraph
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
