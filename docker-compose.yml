@@ -37,7 +37,8 @@ services:
   fedora:
     # build:
     #   context: ./images/isle-fedora
-    image: islandoracollabgroup/isle-fedora:1.1
+    #image: islandoracollabgroup/isle-fedora:1.1
+    image: islandoracollabgroup/isle-fedora:blazegraph
     container_name: isle-fedora-${CONTAINER_SHORT_ID}
     environment:
       - JAVA_MAX_MEM=768M
@@ -71,6 +72,8 @@ services:
       - JAVA_MIN_MEM=1024M
     env_file: 
       - tomcat.env
+    networks:
+      - isle-internal      
     ports:
       - "8084:8080"
     volumes:
