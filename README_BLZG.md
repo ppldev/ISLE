@@ -43,16 +43,17 @@ Usage of Blazegraph is almost 100% similar to typical ISLE with a few exceptions
     - `cd ISLE` (by default)
 4. Pull the latest images:
     - `docker-compose pull`
-5. Launch the ISLE stack:
+5. Edit the .env file and comment out line 95 and uncomment line 98.
+6. Launch the ISLE stack:
     - `docker-compose up -d`
-6. Please wait a few moments for the stack to fully come up.  Approximately 3-5 minutes.
-7. Install Islandora on the isle-apache-ld container:
+7. Please wait a few moments for the stack to fully come up.  Approximately 3-5 minutes.
+8. Install Islandora on the isle-apache-ld container:
     - `docker exec -it isle-apache-ld bash /utility-scripts/isle_drupal_build_tools/isle_islandora_installer.sh`
-8. QC site by creating a test collection e.g. test:collection and ingesting a few different object types e.g. pdf, tiff and jpg. Change the default Drupal search block to use `Islandora Simple Search` and search for the newly ingested items to ensure Solr is displaying newly ingested objects by a `dismax` search or specific search terms. 
+9. QC site by creating a test collection e.g. test:collection and ingesting a few different object types e.g. pdf, tiff and jpg. Change the default Drupal search block to use `Islandora Simple Search` and search for the newly ingested items to ensure Solr is displaying newly ingested objects by a `dismax` search or specific search terms. 
 
 Please note: The ability to navigate here https://isle.localdomain/islandora/object/islandora%3Aroot and see collections also confirms that the Resource Index is getting updated properly using Blazegraph instead of Mulgara.  
 
-9. Once objects have been ingested, double-check that there is a triple count by running the following query here: http://isle.localdomain:8084/blazegraph/#query 
+10. Once objects have been ingested, double-check that there is a triple count by running the following query here: http://isle.localdomain:8084/blazegraph/#query 
 
 Copy and paste the following:
 
@@ -60,7 +61,7 @@ Copy and paste the following:
 
 Then press the `execute` button at the bottom of the page. There should be a triple count higher than the initial 216 or so from startup.
 
-10. To wrap up testing:
+11. To wrap up testing:
     - In the folder with the docker-compose.yml `docker-compose down -v` (nb: the -v removes all volumes, and will delete any work. This option **does not persist your data**)
 
 ### Quick Stop and Cleanup 
