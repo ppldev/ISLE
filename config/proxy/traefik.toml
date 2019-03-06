@@ -3,10 +3,10 @@
 ################################################################
 
 # Enable debug mode
-# debug = true
+debug = true
 
 # Log level
-logLevel = "ERROR"
+logLevel = "DEBUG"
 
 ################################################################
 # Entrypoints configuration
@@ -14,6 +14,8 @@ logLevel = "ERROR"
 
 # Entrypoints definition
 defaultEntryPoints = ["http", "https"]
+
+## Original Traefik configuration
 
 [entryPoints]
   [entryPoints.http]
@@ -36,7 +38,7 @@ defaultEntryPoints = ["http", "https"]
 #
 # Optional
 #
-# [traefikLog]
+[traefikLog]
 
 # Sets the filepath for the traefik log. If not specified, stdout will be used.
 # Intermediate directories are created if necessary.
@@ -44,14 +46,14 @@ defaultEntryPoints = ["http", "https"]
 # Optional
 # Default: os.Stdout
 #
-# filePath = "log/traefik.log"
+filePath = "/etc/traefik/traefik_logs/traefik.log"
 
 # Format is either "json" or "common".
 #
 # Optional
 # Default: "common"
 #
-# format = "common"
+format = "common"
 
 ################################################################
 # Access logs configuration
@@ -63,7 +65,7 @@ defaultEntryPoints = ["http", "https"]
 #
 # Optional
 #
-# [accessLog]
+[accessLog]
 
 # Sets the file path for the access log. If not specified, stdout will be used.
 # Intermediate directories are created if necessary.
@@ -71,14 +73,14 @@ defaultEntryPoints = ["http", "https"]
 # Optional
 # Default: os.Stdout
 #
-# filePath = "/path/to/log/log.txt"
+filePath = "/etc/traefik/traefik_logs/access.log"
 
 # Format is either "json" or "common".
 #
 # Optional
 # Default: "common"
 #
-# format = "common"
+format = "common"
 
 ################################################################
 # API and dashboard configuration

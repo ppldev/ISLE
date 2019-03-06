@@ -106,6 +106,33 @@ services:
       - traefik.enable=false
       - "traefik.frontend.rule=Host:images.${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
 
+  varnish:
+    # build:
+    #   context: ./images/isle-varnish
+    image: islandoracollabgroup/isle-varnish:1.1
+    container_name: isle-varnish-${CONTAINER_SHORT_ID}
+    env_file: 
+      - .env
+    networks:
+      isle-internal:
+    depends_on:
+      - mysql
+      - fedora
+      - solr
+      - apache
+      - traefik
+    # these bind mounts are to be made into confd templates
+    volumes:
+      - ./config/varnish/default.vcl/etc/varnish/default.vcl
+      - ./config/varnish/varnish:/etc/default/varnish
+    #ports:
+    #  - "6085:6085"
+    labels:
+      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+      - traefik.port=6081
+      - traefik.enable=true
+      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
+
   apache:
     # build:
     #   context: ./images/isle-apache
@@ -124,10 +151,10 @@ services:
       - isle-apache-data:/var/www/html
       - ./logs/apache/httpd:/var/log/apache2
       - ./logs/apache/fits:/var/log/fits
-    labels:
-      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
-      - traefik.enable=true
-      - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
+    #labels:
+    #  - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+    #  - traefik.enable=true
+    #  - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
 
   traefik:
     image: traefik:1.6
@@ -143,6 +170,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./config/proxy/ssl-certs:/certs:ro  ## Place certs here.
       - ./config/proxy/traefik.toml:/etc/traefik/traefik.toml  ## Edit line 27, 28 with your cert and key names.
+      - ./logs/traefik:/etc/traefik/traefik_logs
     labels:
       - traefik.port=8080
       - traefik.enable=true  ## NOT SAFE FOR PRODUCTION! ##
