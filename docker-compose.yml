@@ -121,12 +121,6 @@ services:
       - solr
       - apache
       - traefik
-    # these bind mounts are to be made into confd templates
-    volumes:
-      - ./config/varnish/default.vcl/etc/varnish/default.vcl
-      - ./config/varnish/varnish:/etc/default/varnish
-    #ports:
-    #  - "6085:6085"
     labels:
       - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
       - traefik.port=6081
@@ -151,10 +145,6 @@ services:
       - isle-apache-data:/var/www/html
       - ./logs/apache/httpd:/var/log/apache2
       - ./logs/apache/fits:/var/log/fits
-    #labels:
-    #  - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
-    #  - traefik.enable=true
-    #  - "traefik.frontend.rule=Host:${BASE_DOMAIN}; PathPrefix: /, /adore-djatoka, /cantaloupe"
 
   traefik:
     image: traefik:1.6
