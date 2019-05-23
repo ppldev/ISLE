@@ -20,7 +20,7 @@ Please use the [ISLE Documentation](https://islandora-collaboration-group.github
 * Time required < 30 minutes.
 * **Windows Users**: Please open the .env and uncomment `COMPOSE_CONVERT_WINDOWS_PATHS=1`
 
-### Quick Start
+#### Quick Start
 1. Please read: [ISLE Release Candidate (RC): How to Test](https://docs.google.com/document/d/1VUiI_bXo6SLqqUjmInVjBg3-cs40Vj7I_92txjFUoQg/edit#heading=h.1e4943m60lsh)
 2. Clone this repo
     - `git clone https://github.com/Islandora-Collaboration-Group/ISLE.git` 
